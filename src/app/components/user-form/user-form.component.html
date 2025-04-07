@@ -1,0 +1,219 @@
+<div class="user-form-container">
+    <!-- Icon de retour -->
+    <div class="back-icon cursor" (click)="goBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+        </svg>
+        Retour
+    </div>
+
+    <!-- Formulaire de l'utilisateur -->
+    <div class="user-form-card" *ngIf="!isLoading; else loading">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <!-- Nom -->
+            <div class="form-row">
+                <div class="form-label-col">
+                    <p nxCopytext="large">Name :</p>
+                </div>
+                <div class="form-field-col">
+                    <input nxInput formControlName="name" autocomplete="off"/>
+                    <div class="field-error" *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+                        <div *ngIf="userForm.get('name')?.hasError('required')">Name is required.</div>
+                        <div *ngIf="userForm.get('name')?.hasError('pattern')">Name must contain only letters.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="form-row">
+                <div class="form-label-col">
+                    <p nxCopytext="large">Username :</p>
+                </div>
+                <div class="form-field-col">
+                    <input nxInput formControlName="username" autocomplete="off"/>
+                    <div class="field-error" *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched">
+                        <div *ngIf="userForm.get('username')?.hasError('required')">Username is required.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-row">
+                <div class="form-label-col">
+                    <p nxCopytext="large">Email :</p>
+                </div>
+                <div class="form-field-col">
+                    <input nxInput formControlName="email" autocomplete="off"/>
+                    <div class="field-error" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                        <div *ngIf="userForm.get('email')?.hasError('required')">Email is required.</div>
+                        <div *ngIf="userForm.get('email')?.hasError('pattern')">Email is not valid.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Adresse -->
+            <div formGroupName="address">
+                <!-- Rue -->
+                <div class="form-row">
+                    <div class="form-label-col">
+                        <p nxCopytext="large">Street :</p>
+                    </div>
+                    <div class="form-field-col">
+                        <input nxInput formControlName="street" autocomplete="off"/>
+                        <div class="field-error" *ngIf="userForm.get('address.street')?.invalid && userForm.get('address.street')?.touched">
+                            <div *ngIf="userForm.get('address.street')?.hasError('required')">Street is required.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suite -->
+                <div class="form-row">
+                    <div class="form-label-col">
+                        <p nxCopytext="large">Suite :</p>
+                    </div>
+                    <div class="form-field-col">
+                        <input nxInput formControlName="suite" autocomplete="off"/>
+                        <div class="field-error" *ngIf="userForm.get('address.suite')?.invalid && userForm.get('address.suite')?.touched">
+                            <div *ngIf="userForm.get('address.suite')?.hasError('required')">Suite is required.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ville -->
+                <div class="form-row">
+                    <div class="form-label-col">
+                        <p nxCopytext="large">City :</p>
+                    </div>
+                    <div class="form-field-col">
+                        <input nxInput formControlName="city" autocomplete="off"/>
+                        <div class="field-error" *ngIf="userForm.get('address.city')?.invalid && userForm.get('address.city')?.touched">
+                            <div *ngIf="userForm.get('address.city')?.hasError('required')">City is required.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zipcode -->
+                <div class="form-row">
+                    <div class="form-label-col">
+                        <p nxCopytext="large">Zipcode :</p>
+                    </div>
+                    <div class="form-field-col">
+                        <input nxInput formControlName="zipcode" autocomplete="off"/>
+                        <div class="field-error" *ngIf="userForm.get('address.zipcode')?.invalid && userForm.get('address.zipcode')?.touched">
+                            <div *ngIf="userForm.get('address.zipcode')?.hasError('required')">Zipcode is required.</div>
+                            <div *ngIf="userForm.get('address.zipcode')?.hasError('pattern')">Zipcode must be a number.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Géolocalisation -->
+                <div formGroupName="geo">
+                    <!-- Latitude -->
+                    <div class="form-row">
+                        <div class="form-label-col">
+                            <p nxCopytext="large">Latitude :</p>
+                        </div>
+                        <div class="form-field-col">
+                            <input nxInput formControlName="lat" autocomplete="off"/>
+                            <div class="field-error" *ngIf="userForm.get('address.geo.lat')?.invalid && userForm.get('address.geo.lat')?.touched">
+                                <div *ngIf="userForm.get('address.geo.lat')?.hasError('required')">Latitude is required.</div>
+                                <div *ngIf="userForm.get('address.geo.lat')?.hasError('pattern')">Latitude must be a valid number.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Longitude -->
+                    <div class="form-row">
+                        <div class="form-label-col">
+                            <p nxCopytext="large">Longitude :</p>
+                        </div>
+                        <div class="form-field-col">
+                            <input nxInput formControlName="lng" autocomplete="off"/>
+                            <div class="field-error" *ngIf="userForm.get('address.geo.lng')?.invalid && userForm.get('address.geo.lng')?.touched">
+                                <div *ngIf="userForm.get('address.geo.lng')?.hasError('required')">Longitude is required.</div>
+                                <div *ngIf="userForm.get('address.geo.lng')?.hasError('pattern')">Longitude must be a valid number.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="form-row">
+                <div class="form-label-col">
+                    <p nxCopytext="large">Phone :</p>
+                </div>
+                <div class="form-field-col">
+                    <input nxInput formControlName="phone" autocomplete="off"/>
+                    <div class="field-error" *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
+                        <div *ngIf="userForm.get('phone')?.hasError('required')">Phone is required.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Website -->
+            <div class="form-row">
+                <div class="form-label-col">
+                    <p nxCopytext="large">Website :</p>
+                </div>
+                <div class="form-field-col">
+                    <input nxInput formControlName="website" autocomplete="off"/>
+                </div>
+            </div>
+
+            <!-- Company -->
+            <div formGroupName="company">
+                <!-- Name -->
+                <div class="form-row">
+                    <div class="form-label-col">
+                        <p nxCopytext="large">Name :</p>
+                    </div>
+                    <div class="form-field-col">
+                        <input nxInput formControlName="name" autocomplete="off"/>
+                        <div class="field-error" *ngIf="userForm.get('company.name')?.invalid && userForm.get('company.name')?.touched">
+                            <div *ngIf="userForm.get('company.name')?.hasError('required')">Company name is required.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catch Phrase -->
+                <div class="form-row">
+                    <div class="form-label-col">
+                        <p nxCopytext="large">Catch Phrase :</p>
+                    </div>
+                    <div class="form-field-col">
+                        <input nxInput formControlName="catchPhrase" autocomplete="off"/>
+                        <div class="field-error" *ngIf="userForm.get('company.catchPhrase')?.invalid && userForm.get('company.catchPhrase')?.touched">
+                            <div *ngIf="userForm.get('company.catchPhrase')?.hasError('required')">Company catch phrase is required.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BS -->
+                <div class="form-row">
+                    <div class="form-label-col">
+                        <p nxCopytext="large">BS :</p>
+                    </div>
+                    <div class="form-field-col">
+                        <input nxInput formControlName="bs" autocomplete="off"/>
+                        <div class="field-error" *ngIf="userForm.get('company.bs')?.invalid && userForm.get('company.bs')?.touched">
+                            <div *ngIf="userForm.get('company.bs')?.hasError('required')">Company bs is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boutons de validation et réinitialisation -->
+            <div class="language-action">
+                <button type="button" (click)="onSubmit()" [disabled]="userForm.invalid">Valider</button>
+                <button type="button" (click)="onReset()">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Template de chargement -->
+    <ng-template #loading>
+        <p>Chargement des données de l'utilisateur...</p>
+    </ng-template>
+</div>

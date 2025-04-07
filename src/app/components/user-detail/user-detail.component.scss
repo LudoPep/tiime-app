@@ -1,0 +1,149 @@
+.user-card-container {
+    display: flex;
+    justify-content: center;
+
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+}
+
+.back-icon {
+    cursor: pointer;
+    color: white !important;
+}
+
+.user-card {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out;
+    color: black;
+}
+  
+.update-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+  
+.update-button svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
+  
+.update-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+  
+.user-card-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: 20px 0;
+}
+  
+.user-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+  
+.user-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+    margin-left: 3rem;
+}
+  
+.user-card-info .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+  
+.info-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+  
+.col-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+  
+.posts {
+    margin-top: 20px;
+}
+  
+.post-title {
+    cursor: pointer;
+    padding: 15px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+  
+.post-title:hover {
+    background-color: #007bff;
+    color: white;
+}
+  
+.post-body {
+    padding: 10px 15px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+  
+hr {
+    margin: 20px 0;
+    border-top: 1px solid #ddd;
+}
+  
+
+@media (max-width: 768px) {
+    .user-card {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .info-columns {
+      flex-direction: column;
+    }
+  
+    .col-infos {
+      gap: 8px;
+    }
+  
+    .posts {
+      padding: 0;
+    }
+}

@@ -50,4 +50,7 @@ export class UserListComponent implements OnInit {
     this.userQuery.saveState();
   }
 
+  trackByUserId(index: number, user: any): number {
+    return user.id;
+  }
 }

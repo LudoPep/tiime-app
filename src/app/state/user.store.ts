@@ -39,9 +39,9 @@ export class UserStore extends Store<UserState> {
     this.saveState();
   }
 
-  addUser(addedUser: User) {
+  addUser(newUser: User) {
     this.update(state => ({
-      users: [...state.users, addedUser]
+      users: [...state.users, newUser]
     }));
     this.saveState();
   }

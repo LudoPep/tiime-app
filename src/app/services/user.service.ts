@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { User } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../interfaces/post';
@@ -33,15 +33,32 @@ export class UserService {
 
   public updateUser(user: User): Observable<User> {
     const endpoint = `${this.apiBaseUrl}/users/${user.id}`;
-    return this.http.put<User>(endpoint, user).pipe(
-      tap(updated => this.userStore.updateUser(updated))
-    );
+
+    if (user.id <= 10) {
+      const endpoint = `${this.apiBaseUrl}/users/${user.id}`;
+      return this.http.put<User>(endpoint, user).pipe(
+        tap(updated => this.userStore.updateUser(updated)),
+        catchError(error => {
+          console.error('Erreur lors de la mise à jour côté API', error);
+          return throwError(() => error);
+        })
+      );
+    } else {
+      this.userStore.updateUser(user);
+      return of(user);
+    }
   }
 
-  public addUser(user: User): Observable<User> {
+  addUser(user: User): Observable<User> {
     const endpoint = `${this.apiBaseUrl}/users`;
     return this.http.post<User>(endpoint, user).pipe(
-      tap(added => this.userStore.addUser(added))
+      map((responseUser) => {
+        const currentUsers = this.userStore.getValue().users;
+        const newId = Math.max(...currentUsers.map(u => u.id)) + 1;
+  
+        return { ...responseUser, id: newId };
+      }),
+      tap((userWithId) => this.userStore.addUser(userWithId))
     );
   }
 

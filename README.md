@@ -1,27 +1,40 @@
-# TiimeApp
+## Choix techniques
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
+- Arborescence du projet : 
+    -- un dossier components, qui regroupe les 3 composants demandés : UserListComponent, UserDetailsComponent et UserFormComponent
 
-## Development server
+    -- un dossier interface, dans lequel sont définit les models de données User et Post, afin de typer les données quand nécessaire
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+    -- un dossier services, qui englobe le UserService, où toutes les méthodes CRUD nécessaires sont définies : 
+        --- GET https://jsonplaceholder.typicode.com/users
+        --- GET https://jsonplaceholder.typicode.com/users/:id
+        --- GET https://jsonplaceholder.typicode.com/users/:id/posts
+        --- PUT https://jsonplaceholder.typicode.com/users/:id
+        --- POST https://jsonplaceholder.typicode.com/users
 
-## Code scaffolding
+    -- un dossier state, afin de gérer l'état à l'aide de la librairie Akita
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- State :
+    -- l'API n'étant pas modulable, il faut gérer les users ajoutés manuellement. Il y a donc une logique dans le UserService (updateUser()) pour modifier les user provenant de l'API (PUT) et ceux qui ont été créés (update du store).
 
-## Build
+- Routing :
+    -- à l'entrée du projet, on arrive directement sur la liste des users
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+    -- uniquement au clic sur un user, le component UserDetailsComponent est chargé avec ses données, grâce au lazy loading et l'utilisation de loadComponent()
 
-## Running unit tests
+    -- l'affectation de l'id du user dans l'url se fait grâce au paramètre dynamique :id
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Styles : 
+    -- interface responsive grâce au media queries
 
-## Running end-to-end tests
+    -- utilisation de composants Bootstrap (icones)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Axes d'amélioration
+- Possibilité d'ajouter des posts pour un user donné
+- Blocage des boutons lorsque les services sont en PROCESSING
+- Ajout des tests avec JEST
+- Ajout de message toast pour indiquer le succès ou les erreurs lors des appels métier
+- Utilisation de Validateurs personnalisés et regroupés dans un dossier helpers afin de pouvoir les réutiliser facilement en cas de multiplication du formulaire, ce qui allègerait le code et le rendrait plus lisible
+- Utilisation du 'control flow syntax'

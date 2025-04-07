@@ -8,6 +8,7 @@ import { UserService } from '../../services/user.service';
 import { UserQuery } from '../../state/user.query';
 import { CommonModule } from '@angular/common';
 import { UserStore } from '../../state/user.store';
+import { Post } from '../../interfaces/post';
 
 @Component({
   selector: 'app-user-form',
@@ -80,7 +81,6 @@ export class UserFormComponent implements OnInit {
     this.user$ = this.userQuery.select(state => state.users.find(user => user.id === userId));
 
     this.user$.subscribe(user => {
-      console.log(user);
       if (user) {
         this.userForm.patchValue({
           name: user.name,
@@ -121,12 +121,9 @@ export class UserFormComponent implements OnInit {
         id: this.userId,
       };
     } else {
-      const usersCount = this.userQuery.getValue().users?.length || 0;
-      const newId = usersCount + 1;
-
       this.formValue = {
-        id: newId,
         ...this.userForm.value,
+        id: null
       };
     }
     
@@ -158,26 +155,14 @@ export class UserFormComponent implements OnInit {
   callAddUser() {
     this.userService.addUser(this.formValue).pipe(
       take(1),
-      catchError((error) => {
-        this.errorMessage = 'Erreur lors de la création.';
-        this.loading = false;
+      catchError((err) => {
+        this.errorMessage = "Erreur lors de la création";
         return of(null);
       })
-    ).subscribe(user => {
-      if (user?.id) {
-        this.userStore.update(state => {
-          const alreadyExists = state.users.some(u => u.id === user.id);
-          if (!alreadyExists) {
-            return {
-              users: [...state.users, user]
-            };
-          }
-          return state;
-        });
-    
-        this.router.navigate(['details', user.id]);
+    ).subscribe((createdUser) => {
+      if (createdUser) {
+        this.router.navigate(['/details', createdUser.id]);
       }
-      this.loading = false;
     });
   }
 

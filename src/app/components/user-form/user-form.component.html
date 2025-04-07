@@ -11,6 +11,10 @@
     <!-- Formulaire de l'utilisateur -->
     <div class="user-form-card" *ngIf="!isLoading; else loading">
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            
+            <!-- Infos -->
+            <span class="title">Infos</span>
+            <hr>
             <!-- Nom -->
             <div class="form-row">
                 <div class="form-label-col">
@@ -53,6 +57,8 @@
             </div>
 
             <!-- Adresse -->
+            <span class="title">Address</span>
+            <hr>
             <div formGroupName="address">
                 <!-- Rue -->
                 <div class="form-row">
@@ -162,7 +168,10 @@
                 </div>
             </div>
 
+    
             <!-- Company -->
+            <span class="title">Company</span>
+            <hr>
             <div formGroupName="company">
                 <!-- Name -->
                 <div class="form-row">

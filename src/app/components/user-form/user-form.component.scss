@@ -25,7 +25,7 @@
 
 .form-row {
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   justify-content: space-between;
 }
 
@@ -86,6 +86,23 @@ input[nxInput]:focus {
   background-color: #0056b3;
 }
 
+.add-post {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  width: 82px;
+  justify-content: center;
+  display: flex;
+}
+
+.add-post:hover {
+  background-color: #0056b3;
+}
+
 #loading {
   text-align: center;
   font-size: 16px;
@@ -116,4 +133,25 @@ input[nxInput]:focus {
 
 .back-icon svg {
   margin-right: 8px;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.post-preview {
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+}
+
+.add-post-form {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

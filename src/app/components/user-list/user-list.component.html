@@ -10,7 +10,7 @@
     </div>
 
     <div class="user-card-container" *ngIf="users$ | async as users; else loading">
-      <div *ngFor="let user of users" class="user-card cursor" [routerLink]="['/details', user.id]">
+      <div *ngFor="let user of users; trackBy: trackByUserId" class="user-card cursor" [routerLink]="['/details', user.id]">
         <div class="user-card-image" >
           <img src="../../../assets/avatar-neutre.png" alt="Avatar" />
         </div>

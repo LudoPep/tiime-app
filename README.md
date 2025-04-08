@@ -29,12 +29,14 @@
 
     -- utilisation de composants Bootstrap (icones)
 
+- Testing :
+    -- Utilisation de Jest
 
 
 ## Axes d'amélioration
 - Possibilité d'ajouter des posts pour un user donné
 - Blocage des boutons lorsque les services sont en PROCESSING
-- Ajout des tests avec JEST
+- Optimiser les tests pour limiter la période de timeout (TDD)
 - Ajout de message toast pour indiquer le succès ou les erreurs lors des appels métier
 - Utilisation de Validateurs personnalisés et regroupés dans un dossier helpers afin de pouvoir les réutiliser facilement en cas de multiplication du formulaire, ce qui allègerait le code et le rendrait plus lisible
 - Utilisation du 'control flow syntax'

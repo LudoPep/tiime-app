@@ -41,7 +41,7 @@ export class UserFormComponent implements OnInit {
     private userService: UserService,
   ) {
     this.userForm = this.fb.group({
-      name: [null, [Validators.required, Validators.pattern('^[A-Za-z ]+$')]],
+      name: [null, [Validators.required, Validators.pattern('^[A-Za-z\. ]+$')]],
       username: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       phone: [null, Validators.required],

@@ -56,6 +56,29 @@
                 </div>
             </div>
 
+            <!-- Phone -->
+            <div class="form-row">
+                <div class="form-label-col">
+                    <p nxCopytext="large">Phone :</p>
+                </div>
+                <div class="form-field-col">
+                    <input nxInput formControlName="phone" autocomplete="off"/>
+                    <div class="field-error" *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
+                        <div *ngIf="userForm.get('phone')?.hasError('required')">Phone is required.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Website -->
+            <div class="form-row">
+                <div class="form-label-col">
+                    <p nxCopytext="large">Website :</p>
+                </div>
+                <div class="form-field-col">
+                    <input nxInput formControlName="website" autocomplete="off"/>
+                </div>
+            </div>
+
             <!-- Adresse -->
             <span class="title">Address</span>
             <hr>
@@ -144,30 +167,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Phone -->
-            <div class="form-row">
-                <div class="form-label-col">
-                    <p nxCopytext="large">Phone :</p>
-                </div>
-                <div class="form-field-col">
-                    <input nxInput formControlName="phone" autocomplete="off"/>
-                    <div class="field-error" *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
-                        <div *ngIf="userForm.get('phone')?.hasError('required')">Phone is required.</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Website -->
-            <div class="form-row">
-                <div class="form-label-col">
-                    <p nxCopytext="large">Website :</p>
-                </div>
-                <div class="form-field-col">
-                    <input nxInput formControlName="website" autocomplete="off"/>
-                </div>
-            </div>
-
     
             <!-- Company -->
             <span class="title">Company</span>

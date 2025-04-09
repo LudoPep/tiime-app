@@ -32,16 +32,10 @@ export class UserService {
   }
 
   public updateUser(user: User): Observable<User> {
-    const endpoint = `${this.apiBaseUrl}/users/${user.id}`;
-
     if (user.id <= 10) {
       const endpoint = `${this.apiBaseUrl}/users/${user.id}`;
       return this.http.put<User>(endpoint, user).pipe(
         tap(updated => this.userStore.updateUser(updated)),
-        catchError(error => {
-          console.error('Erreur lors de la mise à jour côté API', error);
-          return throwError(() => error);
-        })
       );
     } else {
       this.userStore.updateUser(user);

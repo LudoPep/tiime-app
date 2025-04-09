@@ -178,7 +178,11 @@ export class UserFormComponent implements OnInit {
   }
 
   onReset() {
-    this.userForm.reset();
+    if(this.userId) {
+      this.initFormFieldsFromUserId(this.userId);
+    } else {
+      this.userForm.reset();
+    }
   }
 
   goBack() {
